@@ -13,14 +13,15 @@ export default function Login() {
   const userData = useContext(DataContext);
   const { setUserDetails, setlogin } = userData;
 
+  console.log(location)
 
-  function handleLogin(e, location) {
-    const { state: { path } } = location;
+  function handleLogin(e) {
+    const { state } = location;
 
     e.preventDefault();
     setUserDetails({ username: username, password: password });
     setlogin(true);
-    navigate(path);
+    navigate(state == null ? '/' : state.path);
 
   }
   return (
@@ -85,7 +86,7 @@ export default function Login() {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={(e) => handleLogin(e, location)}
+                onClick={(e) => handleLogin(e)}
               >
                 Sign in
               </button>
